@@ -1,3 +1,8 @@
+# Ignore pdf, txt, png
+*.pdf
+*.txt
+*.png
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
