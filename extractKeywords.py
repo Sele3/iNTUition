@@ -51,7 +51,7 @@ def summarise(para):
     return response
 
 
-def tf_model(rt):
+def tf_model(rt) -> list:
     #initialize model
     e = pke.unsupervised.TfIdf()
 
@@ -68,7 +68,7 @@ def tf_model(rt):
     return return_top_keywords(keyphrases)
 
 
-def infographic(key, filepath):
+def infographic(key, filename):
     #\frontend\public\media
     #d7417c5d6d385baaaa71776f6b7143f5c97d0059
     os.environ["REPLICATE_API_TOKEN"] = "d7417c5d6d385baaaa71776f6b7143f5c97d0059"
@@ -107,12 +107,36 @@ def infographic(key, filepath):
 
     print(prompt)
     link = version.predict(**inputs)
-    urlretrieve(link[0], "./frontend/public/media/infographic.png")
+    urlretrieve(link[0], "./frontend/public/media/" + filename)
 
 
 def generate_infographic(text: str) -> None:
     keywords = tf_model(text)
-    infographic(keywords, "./frontend/public/media/infographic.png")
+    infographic(keywords, "infographic.png")
+
+
+def generate_slides_images(text: str) -> None:
+    keywords: list = tf_model(text)
+    for keyword in keywords:
+        os.environ["REPLICATE_API_TOKEN"] = "d7417c5d6d385baaaa71776f6b7143f5c97d0059"
+        model = replicate.models.get("stability-ai/stable-diffusion")
+        version = model.versions.get("db21e45d3f7023abc2a46ee38a23973f6dce16bb082a930b0c49861f96d1e5bf")
+        prompt = ",".join(['image', 'medical', 'powerpoint slide'] + [keyword])
+
+        inputs = {
+            'prompt': prompt,
+            'image_dimensions': "512x512",
+            # 'negative_prompt': ...,
+            'num_outputs': 1,
+            'num_inference_steps': 50,
+            'guidance_scale': 7.5,
+            'scheduler': "DPMSolverMultistep",
+        }
+
+        print(prompt)
+        link = version.predict(**inputs)
+        urlretrieve(link[0], "./frontend/public/media/" + keyword + ".png")
+
 
 
 # def main():
