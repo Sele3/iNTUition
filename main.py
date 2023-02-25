@@ -1,9 +1,10 @@
 from fastapi import FastAPI, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from PyPDF2 import PdfReader
-#from summarizer import *
+from summarizers import *
 import re
-from bert import bert_summarizer
+#from bert import bert_summarizer
+from summarizer.sbert import SBertSummarizer
 
 
 app = FastAPI()
@@ -21,13 +22,9 @@ app.add_middleware(
 @app.post("/api/uploadfile/")
 async def create_upload_file(file: UploadFile):
     extracted_text = extract_pdf_file(file.file)
-
-    return {"filename": bert_summarizer(extracted_text)}
-
-    extracted_text = extract_pdf_file(file.file)
+    model = SBertSummarizer('paraphrase-MiniLM-L6-v2')
+    summarized_text = model(extracted_text, num_sentences=5)
     
-    summarized_text = text_summarizer(extracted_text)
-
     with open('sample.txt', 'w', encoding='utf-8') as f:
         f.write(extracted_text)
 
@@ -41,7 +38,7 @@ def extract_pdf_file(file) -> str:
     for page_num in range(1, len(pdf_reader.pages)-1):
         page = pdf_reader.pages[page_num]
         result += page.extract_text()
-
+    
     return clean_text(result)
     
 
