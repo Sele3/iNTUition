@@ -5,6 +5,7 @@ from summarizers import *
 import re
 #from bert import bert_summarizer
 from summarizer.sbert import SBertSummarizer
+from extractKeywords import generate_infographic
 
 
 app = FastAPI()
@@ -27,6 +28,10 @@ async def create_upload_file(file: UploadFile):
     
     with open('sample.txt', 'w', encoding='utf-8') as f:
         f.write(extracted_text)
+
+    # Generate infographic
+    generate_infographic(extracted_text)
+    print("done")
 
     return {"filename": summarized_text}
 
