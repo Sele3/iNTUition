@@ -3,7 +3,7 @@ import openai
 from nltk.tokenize import sent_tokenize
 import replicate
 import os
-from main import extract_pdf_file
+#from main import extract_pdf_file
 from urllib.request import urlretrieve
 MAX_LENGTH = 1000
 
@@ -103,27 +103,29 @@ def infographic(key, filepath):
 
     # Random seed. Leave blank to randomize the seed
     # 'seed': ...,
-}
+    }
 
     print(prompt)
     link = version.predict(**inputs)
-    urlretrieve(link[0], os.path.join(os.path.dirname(__file__), os.getcwd() + filepath))
-
-def main():
-
-    #extract file from filepath
-    rt = extract_pdf_file("s12916-023-02774-1.pdf")
-
-    #Extract Keywords from chunks
-    keywords = tf_model(rt)
+    urlretrieve(link[0], "./frontend/public/media/infographic.png")
 
 
-    infographic(keywords, "\\frontend\public\media\infographic.png")
+def generate_infographic(text: str) -> None:
+    keywords = tf_model(text)
+    infographic(keywords, "./frontend/public/media/infographic.png")
 
 
+# def main():
+#     #extract file from filepath
+#     rt = extract_pdf_file("s12916-023-02774-1.pdf")
+
+#     #Extract Keywords from chunks
+#     keywords = tf_model(rt)
 
 
+#     infographic(keywords, "./frontend/public/media/infographic.png")
 
-if __name__ == "__main__":
-    main()
+
+# if __name__ == "__main__":
+#     main()
 
