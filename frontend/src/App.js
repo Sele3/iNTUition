@@ -5,6 +5,7 @@ import './index.css';
 import { SummaryText } from './components/SummaryText';
 import { ToggleButtons } from './components/ToggleButtons';
 import axios from 'axios';
+import { Description } from './components/Description';
 
 
 
@@ -69,10 +70,10 @@ function App() {
   }
   // render
   return (
-    <div className="bg-black flex h-screen justify-center">
-      <h1 className="text-white 500 font-thin text-3xl" style = {{position: "absolute", top : "10%"}}>Article Summariser
-      </h1>
-      {!isUploaded && (
+    <div className="bg-stone-500 flex h-screen justify-center">
+      {!isUploaded && (<h1 className='text-white text-5xl font-gloock' style = {{position: "absolute", top: "46%", left:"25%"}}>Easily Extract</h1>)}
+      {!isUploaded && (<Description></Description>)}
+      {isUploaded && (
       <Language languageOptions = {languageOptions} handleLanguageChange = {handleLanguageChange} selectedLanguage = {selectedLanguage}></Language>
       )}
       {!isUploaded && (
@@ -82,9 +83,8 @@ function App() {
       <ToggleButtons mode = {mode} onSum = {setSumMode} onPpt = {setPPTMode} onInfo = {setInfoMode}></ToggleButtons>
       )}
       {summaryText !== "" && isUploaded && (
-      <SummaryText summaryText = {summaryText}></SummaryText>
-      )}
-      
+      <SummaryText summaryText = {summaryText}></SummaryText>)}
+      {isUploaded && (<h1 className='text-white text-5xl font-gloock' style = {{position: "absolute", top: "4%"}}>Bookworm</h1>)}
     </div>
   );
 }

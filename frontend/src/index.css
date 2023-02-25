@@ -1,3 +1,218 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url(https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.min.css);
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;800&display=swap');
+body {
+    font-family: 'Poppins', sans-serif;
+}
+.active\:bg-grey-900:active {
+    --tw-bg-opacity: 1;
+    background-color: rgba(17, 24, 39,var(--tw-bg-opacity));
+}
+.hover\:border-4:hover {
+    border-width: 4px;
+}
+.hover\:m-0:hover {
+    margin: 0;
+}
+.focus\:border-4:focus {
+    border-width: 4px;
+}
+.focus\:m-0:focus {
+    margin: 0;
+}
+.active\:border-grey-900:active {
+    --tw-bg-opacity: 1;
+    border-color: rgba(17, 24, 39,var(--tw-bg-opacity));
+}
+.active\:text-grey-900:active {
+    --tw-bg-opacity: 1;
+    color: rgba(17, 24, 39,var(--tw-bg-opacity));
+}
+.active\:border-transparent:active {
+    border-color: transparent;
+}
+
+body {
+  background: #182028;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+h1 {
+  font-size: 9vmin;
+  color: #FFC300;
+  text-align: left;
+  font-family: 'gloock', serif;
+  font-weight: 700;
+  margin: 1rem 0 1rem 2rem;
+}
+
+/* Typewriter effect 1 */
+@keyframes typing {
+  0.0000%, 27.3488% { content: ""; }
+  1.1395%, 26.2093% { content: "S"; }
+  2.2791%, 25.0698% { content: "Su"; }
+  3.4186%, 23.9302% { content: "Sum"; }
+  4.5581%, 22.7907% { content: "Summ"; }
+  5.6977%, 21.6512% { content: "Summa"; }
+  6.8372%, 20.5116% { content: "Summar"; }
+  7.9767%, 19.3721% { content: "Summari"; }
+  9.1163%, 18.2326% { content: "Summarie"; }
+  10.2558%, 17.0930% { content: "Summaries"; }
+
+  30.7674%, 51.2791% { content: ""; }
+  31.9070%, 50.1395% { content: "I"; }
+  33.0465%, 49.0000% { content: "Im"; }
+  34.1860%, 47.8605% { content: "Ima"; }
+  35.3256%, 46.7209% { content: "Imag"; }
+  36.4651%, 45.5814% { content: "Image"; }
+  37.6047%, 44.4419% { content: "Images"; }
+
+  54.6977%, 86.2093% { content: ""; }
+  56.8372%, 85.5698% { content: "P"; }
+  58.9767%, 84.9302% { content: "Po"; }
+  60.1163%, 83.7907% { content: "Pow"; }
+  62.2558%, 82.6512% { content: "Powe"; }
+  64.3953%, 81.5116% { content: "Power"; }
+  66.5349%, 80.3721% { content: "Powerp"; }
+  67.9721%, 79.8605% { content: "Powerpo"; }
+  68.7674%, 78.7209% { content: "Powerpoi"; }
+  69.9070%, 77.5814% { content: "Powerpoin"; }
+  71.0465%, 76.4419% { content: "Powerpoint"; }
+  72.7860%, 75.3023% { content: "Powerpoints"; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typewriter {
+  --caret: currentcolor;
+}
+
+.typewriter::before {
+  content: "";
+  animation: typing 13.5s infinite;
+  color: #FFC300;
+}
+
+.typewriter::after {
+  content: "";
+  border-right: 1px solid var(--caret);
+  animation: blink 0.5s linear infinite;
+}
+
+.typewriter.thick::after {
+  border-right: 1ch solid var(--caret);
+}
+
+.typewriter.nocaret::after {
+  border-right: 0;
+}
+
+
+@media (prefers-reduced-motion) {
+  .typewriter::after {
+    animation: none;
+  }
+  
+  @keyframes sequencePopup {
+    0%, 100% { content: "summaries"; }
+    33% { content: "images"; }
+    66% { content: "powerpoints"; }
+  }
+
+  .typewriter::before {
+    content: "developer";
+    animation: sequencePopup 12s linear infinite;
+  }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: #272727;
+  font-family: "Montserrat", sans-serif;
+}
+
+.navMenu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.navMenu a {
+  color: #f6f4e6;
+  text-decoration: none;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: inline-block;
+  width: 80px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.navMenu a:hover {
+  color: #fddb3a;
+}
+
+.navMenu .dot {
+  width: 6px;
+  height: 6px;
+  background: #fddb3a;
+  border-radius: 50%;
+  opacity: 0;
+  -webkit-transform: translateX(30px);
+  transform: translateX(30px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.navMenu a:nth-child(1):hover ~ .dot {
+  -webkit-transform: translateX(30px);
+  transform: translateX(30px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(2):hover ~ .dot {
+  -webkit-transform: translateX(110px);
+  transform: translateX(110px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(3):hover ~ .dot {
+  -webkit-transform: translateX(200px);
+  transform: translateX(200px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(4):hover ~ .dot {
+  -webkit-transform: translateX(285px);
+  transform: translateX(285px);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
