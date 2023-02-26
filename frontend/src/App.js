@@ -83,7 +83,7 @@ function App() {
       {isUploaded && (
       <ToggleButtons mode = {mode} onSum = {setSumMode} onPpt = {setPPTMode} onInfo = {setInfoMode}></ToggleButtons>
       )}
-      {summaryText !== "" && isUploaded && (
+      {mode === "summary" && summaryText !== "" && isUploaded && (
       <SummaryText summaryText = {summaryText}></SummaryText>)}
       
     </div>
