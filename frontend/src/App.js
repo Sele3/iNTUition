@@ -6,7 +6,7 @@ import { SummaryText } from './components/SummaryText';
 import { ToggleButtons } from './components/ToggleButtons';
 import axios from 'axios';
 import { Description } from './components/Description';
-
+import { Images } from './components/Images';
 
 
 const languageOptions = [
@@ -68,6 +68,7 @@ function App() {
   const setInfoMode = () =>{
     setMode("info");
   }
+  
   // render
   return (
     <div className="bg-stone-500 flex h-screen justify-center">
@@ -85,6 +86,8 @@ function App() {
       )}
       {mode === "summary" && summaryText !== "" && isUploaded && (
       <SummaryText summaryText = {summaryText}></SummaryText>)}
+      {mode === "info" && isUploaded && (
+      <Images></Images>)}
       
     </div>
   );
