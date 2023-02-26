@@ -66,7 +66,11 @@ def text_summarizer(text: str) -> str:
                         sentence_scores[sent] += word_frequencies[word]
 
     
-    summary_sentences = heapq.nlargest(10, sentence_scores, key=sentence_scores.get)
+    #summary_sentences = heapq.nlargest(20, sentence_scores, key=sentence_scores.get)
+    summary_sentences = heapq.nlargest(5, sentence_scores, key=sentence_scores.get)
+
+    #print(summary_sentences)
 
     summary = ' '.join(summary_sentences)
-    return summarize(summary)
+    return summary
+    #return summarize(summary)
