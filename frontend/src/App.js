@@ -71,6 +71,7 @@ function App() {
   // render
   return (
     <div className="bg-stone-500 flex h-screen justify-center">
+      <h1 className='text-white text-5xl font-gloock' style = {{position: "absolute", top: "4%"}}>Bookworm</h1>
       {!isUploaded && (<h1 className='text-white text-5xl font-gloock' style = {{position: "absolute", top: "46%", left:"25%"}}>Easily Extract</h1>)}
       {!isUploaded && (<Description></Description>)}
       {isUploaded && (
@@ -84,7 +85,7 @@ function App() {
       )}
       {summaryText !== "" && isUploaded && (
       <SummaryText summaryText = {summaryText}></SummaryText>)}
-      {isUploaded && (<h1 className='text-white text-5xl font-gloock' style = {{position: "absolute", top: "4%"}}>Bookworm</h1>)}
+      
     </div>
   );
 }
