@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile
+from fastapi import FastAPI, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from PyPDF2 import PdfReader
 from summarizers import *
@@ -7,7 +7,8 @@ import re
 from summarizer.sbert import SBertSummarizer
 from extractKeywords import generate_infographic, generate_slides_images
 from slideshow import generate_powerpoint
-
+from extractImage import extract_image
+from translator import translate
 
 app = FastAPI()
 
@@ -30,6 +31,8 @@ async def create_upload_file(file: UploadFile):
     with open('sample.txt', 'w', encoding='utf-8') as f:
         f.write(extracted_text)
 
+    # Extract Images from pdf file
+    extract_image(file.file)
     # Generate infographic
     generate_infographic(extracted_text)
     # Generate slide images
@@ -39,7 +42,16 @@ async def create_upload_file(file: UploadFile):
 
     print("done")
 
-    return {"filename": summarized_text}
+    return {"text": summarized_text}
+
+
+@app.get("api/translate")
+def translate(text: str, langauge_from: str, language_to: str):
+    try:
+        result = translate(text, langauge_from, language_to)
+    except Exception as e:
+        raise HTTPException(status_code=403, detail=str(e))
+    return {"text": result}
 
 
 def extract_pdf_file(file) -> str:
