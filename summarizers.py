@@ -2,7 +2,11 @@ import re
 import nltk
 import heapq
 import openai
+import environ
 from nltk.tokenize import sent_tokenize
+
+env = environ.Env()
+environ.Env.read_env()
 
 MAX_LENGTH = 5000
 def split_into_chunks(rt):
@@ -17,7 +21,7 @@ def split_into_chunks(rt):
     return arr
 
 # OpenAI text summarizer
-openai.api_key = ""
+openai.api_key = env("OPENAI_API_KEY")
 
 def summarize(text: str) -> str:
     response = openai.Completion.create(

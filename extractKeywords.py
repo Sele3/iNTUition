@@ -3,8 +3,13 @@ import openai
 from nltk.tokenize import sent_tokenize
 import replicate
 import os
+import environ
 #from main import extract_pdf_file
 from urllib.request import urlretrieve
+
+env = environ.Env()
+environ.Env.read_env()
+
 MAX_LENGTH = 1000
 
 ABBR = {"cvd": "Cardiovascular disease", "t2dm": "Type 2 diabetes", "incident cvd": "Incident Cardiovascular disease"}
@@ -70,8 +75,7 @@ def tf_model(rt) -> list:
 
 def infographic(key, filename):
     #\frontend\public\media
-    #
-    os.environ["REPLICATE_API_TOKEN"] = ""
+    os.environ["REPLICATE_API_TOKEN"] = env("REPLICATE_API_TOKEN")
     model = replicate.models.get("stability-ai/stable-diffusion")
     version = model.versions.get("db21e45d3f7023abc2a46ee38a23973f6dce16bb082a930b0c49861f96d1e5bf")
     prompt = ",".join(['infographic', 'medical']+key)
@@ -118,7 +122,7 @@ def generate_infographic(text: str) -> None:
 def generate_slides_images(text: str) -> None:
     keywords: list = tf_model(text)
     for keyword in keywords:
-        os.environ["REPLICATE_API_TOKEN"] = ""
+        os.environ["REPLICATE_API_TOKEN"] = env("REPLICATE_API_TOKEN")
         model = replicate.models.get("stability-ai/stable-diffusion")
         version = model.versions.get("db21e45d3f7023abc2a46ee38a23973f6dce16bb082a930b0c49861f96d1e5bf")
         prompt = ",".join(['image', 'medical', 'powerpoint slide'] + [keyword])
@@ -136,20 +140,4 @@ def generate_slides_images(text: str) -> None:
         print(prompt)
         link = version.predict(**inputs)
         urlretrieve(link[0], "./frontend/public/media/" + keyword + ".png")
-
-
-
-# def main():
-#     #extract file from filepath
-#     rt = extract_pdf_file("s12916-023-02774-1.pdf")
-
-#     #Extract Keywords from chunks
-#     keywords = tf_model(rt)
-
-
-#     infographic(keywords, "./frontend/public/media/infographic.png")
-
-
-# if __name__ == "__main__":
-#     main()
-
+        
